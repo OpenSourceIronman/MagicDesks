@@ -54,49 +54,19 @@ try:
     
 except ImportError:
     print("Debug.py, GlobalConstant.py, or TODO.py didn't import correctly")
-    print("Please verify that those files are in same directory as the TeslaCanBus.py")
+    print("Please verify that those files are in same directory as the MagicDeskDriver.py")
     #TODO
-
-
-MAX_CPU_FREQ = 240000000
-HIGH = 1
-LOW = 0
-LASER_PIN = 0
-TIME_HIGH_PULSE = 1
-TIME_LOW_PULSE = 0
-
-LASER_TIMEOUT = 0.001 # 1 ms = ?? meters in light Time Of Flight
-
-def getDistance():
-
-    # https://docs.micropython.org/en/latest/library/machine.html#machine.time_pulse_us
-    machine.time_pulse_us(TesMufflerDrice.LASER_PIN, TIME_HIGH_PULSE, LASER_TIMEOUT)
-
-TODO = -1
 
 # Allow micropython to run on ESP-32
 # https://docs.micropython.org/en/latest/esp32/tutorial/intro.html
 # https://micropython.org/download/esp32
 
-if __name__ == "__main__":
-    machine.freq(MAX_CPU_FREQ)
-    machine.soft_reset()
-    machine.unique_id()
+def unitTest():
 
-
-
-
-    # Available Pins are from the following ranges (inclusive): 0-19, 21-23, 25-27, 32-39. 
-    # Pins 1 and 3 are REPL UART TX and RX respectively
-    # Pins 6, 7, 8, 11, 16, and 17 are used for connecting the embedded flash, and are not recommended for other uses
-    # Pins 34-39 are input only, and also do not have internal pull-up resistors
-    # The pull value of some pins can be set to Pin.PULL_HOLD to reduce power consumption during deepsleep.
-    
     ledPin = machine.Pin(0, machine.Pin.OUT, value=LOW) #GPIO0
     ledPin.on()
     ledPin.off()
     ledPin.value(HIGH)
-
 
     gpio_1 = Pin(1, Pin.IN, Pin.PUL_UP)
     print(gpio_1)
@@ -106,7 +76,6 @@ if __name__ == "__main__":
 
     esp32.hall_senor()  # Model M magentic sensor
     esp32.ULP()         # Ultra low power co-processor 
-
 
     i2c = I2C(freq=400000)
     i2c.scan()
@@ -118,3 +87,45 @@ if __name__ == "__main__":
                                     #   starting at memory-address 8 in the slave
     i2c.writeto_mem(42, 2, b'\x10') # write 1 byte to memory of slave 42
                                     #   starting at address 2 in the slave
+
+def getDistance():
+
+    # https://docs.micropython.org/en/latest/library/machine.html#machine.time_pulse_us
+    machine.time_pulse_us(TesMufflerDrice.LASER_PIN, TIME_HIGH_PULSE, LASER_TIMEOUT)
+
+TODO = -1
+
+def pollUpButton(selectedPin):
+    return selectedPin.value
+
+def pollDownButton(selectedPin):
+    return selectedPin.value
+
+def main(args=MODE):
+
+    machine.freq(GC.MAX_CPU_FREQ)
+    machine.soft_reset()
+    machine.unique_id()
+    
+    activeLowErrorLED = machine.Pin(GC.ERROR_LED_PIN, machine.Pin.OUT, value=HIGH)
+    
+    upButton = machine.Pin(GC.UP_BUTTON_PIN, Pin.IN, Pin.PUL_UP)
+    bottomButton = machine.Pin(GC.DOWN_BUTTON_PIN, Pin.IN, Pin.PUL_UP)
+    holdButton = machine.Pin(GC.HOLD_BUTTON_PIN, Pin.IN, Pin.PUL_UP) 
+    
+    leftMagicTouch = machine.Pin(GC.LEFT_MAGIC_TOUCH_PIN, Pin.???)
+    leftMagicTouch = machine.Pin(GC.RIGHT_MAGIC_TOUCH_PIN, Pin.???)
+    
+    ok = True
+    while(ok):
+        holdOn = holdButton.value
+        if(holdOn == False):
+            pollUpButton(upButton)
+            pollDownButton(downButton)
+                
+    activeLowErrorLED.off()
+
+
+if __name__ == "__main__":
+    main(GC.DEVELOPMENT)
+    
