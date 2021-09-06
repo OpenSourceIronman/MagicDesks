@@ -21,13 +21,19 @@ class GlobalConstant:
     # Pins 34-39 are input only, and also do not have internal pull-up resistors
     # The pull value of some pins can be set to Pin.PULL_HOLD to reduce power consumption during deepsleep.
     
-    UP_BUTTON_PIN = 34      # Input only pin
-    DOWN_BUTTON_PIN = 35    # Input only pin
-    HOLD_BUTTON_PIN = 36    # Input only pin
-    ERROR_LED_PIN = 2       # Also connected to an onboard LED
+    UP_BUTTON_PIN = 34          # Input only pin
+    DOWN_BUTTON_PIN = 35        # Input only pin
+    HOLD_BUTTON_PIN = 36        # Input only pin
+    ERROR_LED_PIN = 2           # Also connected to an onboard LED
     LEFT_MAGIC_TOUCH_PIN = 32   # Connect to Internal touch sensor 
     RIGH_MAGIC_TOUCH_PIN = 33   # Connect to internal touch sensor
+    LASER_PIN = 27              # Input & Output to send and recieve pusle                   
     
+    # LASER CONSTANTS    
+    TIME_HIGH_PULSE = 1
+    TIME_LOW_PULSE = 0
+    LASER_TIMEOUT = 0.001 # 1 ms = ?? meters in light Time Of Flight
+
     # Aluminium color CONTSTANTS 
     PRODUCT_RED = 0xB00D23
     APPLE_WHITE = 0XFEFEFE
@@ -48,14 +54,11 @@ class GlobalConstant:
     UI_TERMINAL_DELAY = 0.1         # Units are seconds
     MAX_UI_DEALY = 2.0              # Units are seconds
     FUNCTION_DELAY = 0.005          # Units are seconds
-    
-    
-    MAX_CPU_FREQ = 240000000
+    TOUCH_SENSOR_DELAY = 1.2        # Units are seconds
     HIGH = 1
     LOW = 0
-    LASER_PIN = 0
-    TIME_HIGH_PULSE = 1
-    TIME_LOW_PULSE = 0
-
-    LASER_TIMEOUT = 0.001 # 1 ms = ?? meters in light Time Of Flight
-
+        
+    # CPU CONSTANTS
+    MAX_CPU_FREQ = 240000000        # 24 MHz
+    AVERAGE_CPU_FREQ = 12000000     # 12 MHz
+    MIN_CPU_FREQ = 6000000          # 6 MHz   TODO Deep Sleep for use on batteru power MIGHT need to be slower

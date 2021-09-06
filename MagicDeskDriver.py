@@ -57,6 +57,8 @@ except ImportError:
     print("Please verify that those files are in same directory as the MagicDeskDriver.py")
     #TODO
 
+DEBUG_STATEMENTS_ON = True
+
 # Allow micropython to run on ESP-32
 # https://docs.micropython.org/en/latest/esp32/tutorial/intro.html
 # https://micropython.org/download/esp32
@@ -95,18 +97,32 @@ def getDistance():
 
 TODO = -1
 
+def restart(time):
+    time.sleep(time)
+    machine.soft_reset()
+
 def pollUpButton(selectedPin):
     return selectedPin.value
 
 def pollDownButton(selectedPin):
     return selectedPin.value
 
-def main(args=MODE):
-
-    machine.freq(GC.MAX_CPU_FREQ)
-    machine.soft_reset()
-    machine.unique_id()
+def pollMagicTouchSensors(sensor1, sensor2):
+    if(somethingPluggedIntoOutlet()):
+        break
     
+    if(sensor1.value or sensor2.value):
+        time.sleep(GC.TOUCH_SENSOR_DELAY)
+        if(sensor1.value):
+            openOutlet()
+        elif(sensor2.value)
+            openOutlet()
+    else:
+        time.sleep(GC.MIN_TIMESTAMP)
+
+def main(args=mode):                
+    
+    # See GlobalConstants.py for GPIO pin number definitions
     activeLowErrorLED = machine.Pin(GC.ERROR_LED_PIN, machine.Pin.OUT, value=HIGH)
     
     upButton = machine.Pin(GC.UP_BUTTON_PIN, Pin.IN, Pin.PUL_UP)
@@ -114,18 +130,30 @@ def main(args=MODE):
     holdButton = machine.Pin(GC.HOLD_BUTTON_PIN, Pin.IN, Pin.PUL_UP) 
     
     leftMagicTouch = machine.Pin(GC.LEFT_MAGIC_TOUCH_PIN, Pin.???)
-    leftMagicTouch = machine.Pin(GC.RIGHT_MAGIC_TOUCH_PIN, Pin.???)
+    rightMagicTouch = machine.Pin(GC.RIGHT_MAGIC_TOUCH_PIN, Pin.???)
     
+    # Infinite loop that is only exitted for main problem requiring a restart
+    # The ErrorLED is TURNED on by the off() since it's hardware to ALWAYS be on unless software is TURNING it OFF
     ok = True
     while(ok):
         holdOn = holdButton.value
         if(holdOn == False):
             pollUpButton(upButton)
             pollDownButton(downButton)
-                
-    activeLowErrorLED.off()
-
+        
+        pollMagicTouchSenors() #Start this in a new thread to keep up and down button polling faster then GC.TOUCH_SENSOR_DELAY neeed to reduce touch sensor misfires
+        
+    activeLowErrorLED.off() #TURNS ON LED
 
 if __name__ == "__main__":
+    machine.freq(GC.MAX_CPU_FREQ)
+    
+    uuid = machine.unique_id()
+    if(mode==GC.DEVELOPMENT ot mode==GC.TESTING): 
+        if(DEBUG_STATEMENTS_ON): 
+            print("UUID = ", uuid)
+            print("CPU frequency = ", machine.freq())
+        unitTest()
+
     main(GC.DEVELOPMENT)
     
