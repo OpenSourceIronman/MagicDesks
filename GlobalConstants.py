@@ -28,6 +28,8 @@ class GlobalConstant:
     LEFT_MAGIC_TOUCH_PIN = 32   # Connect to Internal touch sensor 
     RIGH_MAGIC_TOUCH_PIN = 33   # Connect to internal touch sensor
     LASER_PIN = 27              # Input & Output to send and recieve pusle                   
+    L298P_ENABLE_PIN = 
+    L298P_DIRECTION_PIN = 
     
     # LASER CONSTANTS    
     TIME_HIGH_PULSE = 1
@@ -57,8 +59,10 @@ class GlobalConstant:
     TOUCH_SENSOR_DELAY = 1.2        # Units are seconds
     HIGH = 1
     LOW = 0
+    NULL = -1
         
     # CPU CONSTANTS
-    MAX_CPU_FREQ = 240000000        # 24 MHz
-    AVERAGE_CPU_FREQ = 12000000     # 12 MHz
+    MAX_CPU_FREQ = 80000000         # 80 MHz
+    USB_2_FREQ = 48000000           # 48 MHz for 10 bits at 480 MHz
+    AVERAGE_CPU_FREQ = 12000000     # 24 MHz
     MIN_CPU_FREQ = 6000000          # 6 MHz   TODO Deep Sleep for use on batteru power MIGHT need to be slower

@@ -114,9 +114,9 @@ def pollMagicTouchSensors(sensor1, sensor2):
     if(sensor1.value or sensor2.value):
         time.sleep(GC.TOUCH_SENSOR_DELAY)
         if(sensor1.value):
-            openOutlet()
+            Actuator.openOutlet()
         elif(sensor2.value)
-            openOutlet()
+            Actuator.openOutlet()
     else:
         time.sleep(GC.MIN_TIMESTAMP)
 
@@ -138,8 +138,8 @@ def main(args=mode):
     while(ok):
         holdOn = holdButton.value
         if(holdOn == False):
-            pollUpButton(upButton)
-            pollDownButton(downButton)
+            liftDesk(pollUpButton(upButton))
+            lowerDesk(pollDownButton(downButton))
         
         pollMagicTouchSenors() #Start this in a new thread to keep up and down button polling faster then GC.TOUCH_SENSOR_DELAY neeed to reduce touch sensor misfires
         
