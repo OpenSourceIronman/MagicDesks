@@ -31,7 +31,8 @@ class GlobalConstant:
     RIGH_MAGIC_TOUCH_PIN = 33   # Connect to internal touch sensor
     LASER_PIN = 27              # Input & Output to send and recieve pusle                   
     L298_ENABLE_PIN = TODO      # Output pin connected to enable outputs of L298 IC
-    L298_DIRECTION_PIN = TODO   # Output pin connected to control current direction of L298 outputs
+    L298_FORWARD_DIRECTION_PIN = TODO   # Output pin connected to control current direction of L298 outputs
+    L298_BACKWARD_DIRECTION_PIN = TODO   # Output pin connected to control current direction of L298 outputs
     
     # LASER CONSTANTS    
     LASER_TIMEOUT = 0.001       # 1 ms = ?? meters in light Time Of Flight
