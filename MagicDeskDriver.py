@@ -109,13 +109,13 @@ def pollDownButton(selectedPin):
 
 def pollMagicTouchSensors(sensor1, sensor2):
     if(somethingPluggedIntoOutlet()):
-        break
+        print("DO NOTHING")
     
     if(sensor1.value or sensor2.value):
         time.sleep(GC.TOUCH_SENSOR_DELAY)
         if(sensor1.value):
             Actuator.openOutlet()
-        elif(sensor2.value)
+        elif(sensor2.value):
             Actuator.openOutlet()
     else:
         time.sleep(GC.MIN_TIMESTAMP)
@@ -129,8 +129,8 @@ def main(args=mode):
     bottomButton = machine.Pin(GC.DOWN_BUTTON_PIN, Pin.IN, Pin.PUL_UP)
     holdButton = machine.Pin(GC.HOLD_BUTTON_PIN, Pin.IN, Pin.PUL_UP) 
     
-    leftMagicTouch = machine.Pin(GC.LEFT_MAGIC_TOUCH_PIN, Pin.???)
-    rightMagicTouch = machine.Pin(GC.RIGHT_MAGIC_TOUCH_PIN, Pin.???)
+    leftMagicTouch = machine.Pin(GC.LEFT_MAGIC_TOUCH_PIN)   # 2nd argument Pin.???
+    rightMagicTouch = machine.Pin(GC.RIGHT_MAGIC_TOUCH_PIN) # 2nd argument Pin.???
     
     # Infinite loop that is only exitted for main problem requiring a restart
     # The ErrorLED is TURNED on by the off() since it's hardware to ALWAYS be on unless software is TURNING it OFF
@@ -149,7 +149,7 @@ if __name__ == "__main__":
     machine.freq(GC.MAX_CPU_FREQ)
     
     uuid = machine.unique_id()
-    if(mode==GC.DEVELOPMENT ot mode==GC.TESTING): 
+    if(mode==GC.DEVELOPMENT or mode==GC.TESTING): 
         if(DEBUG_STATEMENTS_ON): 
             print("UUID = ", uuid)
             print("CPU frequency = ", machine.freq())

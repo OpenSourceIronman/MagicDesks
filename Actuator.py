@@ -12,11 +12,11 @@ class Actuator:
 
 
 def __init__():
-
-
-def openOutlet(outletList, specificOutlet=GC.NULL):
-    if(specificOutlet != GC.NULL):
     
+
+def openOutlet(outletList, outletNumber=GC.NULL):
+    if(outletNumber != GC.NULL):
+       outletList[outletNumber]
     else:
         numOfOutlets = len(outlerList)
         for i in range(0, numOfOutlets

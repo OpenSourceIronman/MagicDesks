@@ -10,6 +10,8 @@ __doc__     = "Useful global constants used across all Standing Strong Desks cod
 
 class GlobalConstant:
 
+    TODO = -1
+
     # Desk model name CONTSTANTS
     MAGIC_DESK_V0 = 0
     
@@ -28,13 +30,11 @@ class GlobalConstant:
     LEFT_MAGIC_TOUCH_PIN = 32   # Connect to Internal touch sensor 
     RIGH_MAGIC_TOUCH_PIN = 33   # Connect to internal touch sensor
     LASER_PIN = 27              # Input & Output to send and recieve pusle                   
-    L298P_ENABLE_PIN = 
-    L298P_DIRECTION_PIN = 
+    L298_ENABLE_PIN = TODO      # Output pin connected to enable outputs of L298 IC
+    L298_DIRECTION_PIN = TODO   # Output pin connected to control current direction of L298 outputs
     
     # LASER CONSTANTS    
-    TIME_HIGH_PULSE = 1
-    TIME_LOW_PULSE = 0
-    LASER_TIMEOUT = 0.001 # 1 ms = ?? meters in light Time Of Flight
+    LASER_TIMEOUT = 0.001       # 1 ms = ?? meters in light Time Of Flight
 
     # Aluminium color CONTSTANTS 
     PRODUCT_RED = 0xB00D23
